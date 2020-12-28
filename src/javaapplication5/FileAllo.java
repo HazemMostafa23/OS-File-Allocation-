@@ -319,4 +319,172 @@ for(int i=0;i<memorySize;i++){
       
   }
   
+  boolean isAvail2(){
+      free=new ArrayList<Integer>(); 
+      
+      for(int i=0;i<memorySize;i++){
+          if(x[i].check==false){
+              free.add(i);
+          }
+          
+      }
+      if(free.size()>=obj2.fileSize){
+          return true;
+      }
+     else return false;
+  }
+  void insert2(String fileName,int fileSize){
+      int count=0;
+      obj2.fileName=fileName;
+      obj2.fileSize=fileSize;
+     
+      if(isAvail2()==true){
+          obj2.Pointers=new ArrayList<Integer>();
+          Random number=new Random();
+          int no;
+          int index2=0;
+          
+ while(count!=fileSize){
+     no=number.nextInt()%memorySize;
+ while(no<0||free.contains(no)==false){
+     no=number.nextInt()%memorySize;
+ }
+          x[no].check=true;
+          x[no].obj2.fileName=obj2.fileName;
+          int index=free.indexOf(no);
+          free.remove(index);
+          count++;
+      if(count==1){
+      obj2.sPoint=no;
+      }
+      if(count>=1){ 
+          x[index2].point=no;
+          index2=no;
+      }
+      obj2.ePoint=no;
+      obj2.Pointers.add(no);
+
+ } 
+ list.add(new FileInfo(obj2.fileName,obj2.fileSize,obj2.sPoint,obj2.ePoint,obj2.Pointers));
+       } 
+      else 
+      {
+          System.out.println("No space available");
+           System.out.println(free.size());
+      }
+      
+      
+  }
+
+ 
+  void delete2(String fileName){
+      boolean check=false;
+       for(int i=0;i<list.size();i++) { 
+        if(list.get(i).fileName.equals(fileName)){
+            obj2.fileName=list.get(i).fileName;
+            obj2.fileSize=list.get(i).fileSize;
+            obj2.sPoint=list.get(i).sPoint;
+            obj2.ePoint=list.get(i).ePoint;
+            for(int j=0;j<list.get(i).Pointers.size();j++){
+             x[list.get(i).Pointers.get(j)].check=false;
+             x[list.get(i).Pointers.get(j)].obj2.fileName=null;
+             x[list.get(i).Pointers.get(j)].point=-1;
+       
+                 
+                
+            }
+            list.remove(i);
+            check=true;
+       }  
+     } 
+    
+      if(check==false){
+           System.out.println("The requested file doesn't exist");
+           
+       }
+        
+              
+           
+      
+  }
+ 
+     void menu()
+ {
+     System.out.println("*****************************************************");
+     System.out.println("\t  CONTIGUOUS ALLOCATION MENU \t  ");
+       System.out.println("*****************************************************");
+     System.out.println("1. Add a file \n2. Delete a file\n3. Access all blocks\n4. Show table\n5. Change Allocation.\n6.Exit Application  ");
+          System.out.println("*****************************************************");
+     
+ }
+          void menu2()
+ {
+       System.out.println("Choose your file allocation method. ");
+     System.out.println("**********");
+     System.out.println(" MENU \t  ");
+  System.out.println("**********");
+     System.out.println("1. Contiguous Allocation \n2. Linked Allocation \n3. Indexed Allocation\n 4. Exit application  ");
+  System.out.println("**********");
+     
+ }
+   void menu3()
+ {
+     System.out.println("*****************************************************");
+     System.out.println("\t LINKED ALLOCATION MENU \t  ");
+     System.out.println("*****************************************************");
+     System.out.println("1. Add a file \n2. Delete a file\n3. Access allocated blocks\n4. Show pointers' order\n5. Change Allocation.\n6.Exit Application  ");
+     System.out.println("*****************************************************");
+     
+ }
+   void menu4()
+ {
+     System.out.println("*****************************************************");
+     System.out.println("\t INDEXED ALLOCATION MENU \t  ");
+     System.out.println("*****************************************************");
+     System.out.println("1. Add a file \n2. Delete a file\n3. Access index blocks\n4. Change Allocation\n5. Exit Application.  ");
+      System.out.println("*****************************************************");
+     
+ }
+  void show2(){ // FILE BLOCK TABLE
+       System.out.println("-----------------------------------------------------------------------------");
+    System.out.printf("%5s %20s %11s %11s ", "FILE NAME ", "FILE SIZE ", "STARTING POINT", "ENDING POINT");
+    System.out.println();
+    System.out.println("-----------------------------------------------------------------------------");
+      for(int i = 0; i < list.size(); i++) 
+      {   
+          
+           System.out.format("%5s %20s %11s %11d",list.get(i).fileName,list.get(i).fileSize,list.get(i).sPoint,list.get(i).ePoint);
+           System.out.println();
+}  
+      System.out.println("-----------------------------------------------------------------------------");
+  }
+  
+      
+      
+      
+      
+    
+  }
+  void show3(){  // MEMORY BLOCKS
+      for(int i=0;i<memorySize;i++){
+         if(x[i].points_to!=null){
+        
+         
+              System.out.println("MEMORY BLOCK:"+ i+ " holds a pointer");
+            
+          }
+         else 
+      
+           System.out.println("MEMORY BLOCK:"+ i+ " contains FILENAME:"+ x[i].obj2.fileName+" ");
+  }
+      
+      
+  }
+  void show5(){ 
+      for(int i=0;i<list.size();i++){
+          System.out.println(list.get(i).fileName+" has the following pointers "+ list.get(i).Pointers);
+      }
+      
+      
+  }
 }
