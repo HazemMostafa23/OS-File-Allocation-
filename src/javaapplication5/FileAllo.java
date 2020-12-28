@@ -255,44 +255,7 @@ list.add(new FileInfo(obj2.fileName,obj2.fileSize,obj2.sPoint,obj2.ePoint));
            
       
   }
-     void menu()
- {
-     System.out.println("*****************************************************");
-     System.out.println("\t  CONTIGUOUS ALLOCATION MENU \t  ");
-       System.out.println("*****************************************************");
-     System.out.println("1. Add a file \n2. Delete a file\n3. Access all blocks\n4. Show table\n5. Change Allocation.\n6.Exit Application  ");
-          System.out.println("*****************************************************");
-     
- }
-          void menu2()
- {
-       System.out.println("Choose your file allocation method. ");
-     System.out.println("**********");
-     System.out.println(" MENU \t  ");
-  System.out.println("**********");
-     System.out.println("1. Contiguous Allocation \n2. Linked Allocation \n3. Indexed Allocation\n 4. Exit application  ");
-  System.out.println("**********");
-     
- }
-   void menu3()
- {
-     System.out.println("*****************************************************");
-     System.out.println("\t LINKED ALLOCATION MENU \t  ");
-     System.out.println("*****************************************************");
-     System.out.println("1. Add a file \n2. Delete a file\n3. Access allocated blocks\n4. Show pointers' order\n5. Change Allocation.\n6.Exit Application  ");
-     System.out.println("*****************************************************");
-     
- }
-   void menu4()
- {
-     System.out.println("*****************************************************");
-     System.out.println("\t INDEXED ALLOCATION MENU \t  ");
-     System.out.println("*****************************************************");
-     System.out.println("1. Add a file \n2. Delete a file\n3. Access index blocks\n4. Change Allocation\n5. Exit Application.  ");
-      System.out.println("*****************************************************");
-     
- }
-
+   
   void show(){
       for(int i=0;i<memorySize;i++){
           if(x[i].obj2.fileName!=null){
@@ -464,7 +427,7 @@ for(int i=0;i<memorySize;i++){
       
       
     
-  }
+  
   void show3(){  // MEMORY BLOCKS
       for(int i=0;i<memorySize;i++){
          if(x[i].points_to!=null){
